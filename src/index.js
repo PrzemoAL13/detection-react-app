@@ -10,12 +10,22 @@ import { createRoot } from "react-dom/client";
 // };
 
 class App extends React.Component {
-	render() {
+	constructor(props) {
+		super(props);
+		this.state = { latitude: null };
+
 		navigator.geolocation.getCurrentPosition(
-			position => console.log(position),
+			position => {
+				// console.log(position);
+				this.setState({ latitude: position.coords.latitude });
+			},
+
 			error => console.log(error)
 		);
-		return <div>You are in Northen hemisphere;</div>;
+	}
+
+	render() {
+		return <div>{this.state.latitude}</div>;
 	}
 }
 
