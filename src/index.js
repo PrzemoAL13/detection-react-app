@@ -12,7 +12,7 @@ import { createRoot } from "react-dom/client";
 class App extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { latitude: null };
+		this.state = { latitude: null, errorMsg: "" };
 
 		navigator.geolocation.getCurrentPosition(
 			position => {
@@ -20,12 +20,19 @@ class App extends React.Component {
 				this.setState({ latitude: position.coords.latitude });
 			},
 
-			error => console.log(error)
+			error => {
+				this.setState({ errorMsg: error.message });
+			}
 		);
 	}
 
 	render() {
-		return <div>{this.state.latitude}</div>;
+		return (
+			<div>
+				{this.state.latitude}
+				{this.state.errorMsg}
+			</div>
+		);
 	}
 }
 
