@@ -1,6 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-
+import HemisphereDisplay from "./components/HemisphereDisplay";
 // const App = () => {
 // 	navigator.geolocation.getCurrentPosition(
 // 		position => console.log(position),
@@ -15,7 +15,7 @@ class App extends React.Component {
 	// 	this.state = { latitude: null, errorMsg: "" };
 	// }
 
-	state = { lattitude: null, errorMsg: "" };
+	state = { latitude: null, errorMsg: "" };
 
 	componentDidMount() {
 		navigator.geolocation.getCurrentPosition(
@@ -37,7 +37,12 @@ class App extends React.Component {
 
 	render() {
 		if (!this.state.errorMsg && this.state.latitude) {
-			return <div>{this.state.latitude}</div>;
+			return (
+				<div>
+					{" "}
+					<HemisphereDisplay latitude={this.state.latitude} />{" "}
+				</div>
+			);
 		}
 
 		if (this.state.errorMsg && !this.state.latitude) {
