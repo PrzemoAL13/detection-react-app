@@ -10,10 +10,14 @@ import { createRoot } from "react-dom/client";
 // };
 
 class App extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = { latitude: null, errorMsg: "" };
+	// constructor(props) {
+	// 	super(props);
+	// 	this.state = { latitude: null, errorMsg: "" };
+	// }
 
+	state = { lattitude: null, errorMsg: "" };
+
+	componentDidMount() {
 		navigator.geolocation.getCurrentPosition(
 			position => {
 				// console.log(position);
@@ -24,6 +28,11 @@ class App extends React.Component {
 				this.setState({ errorMsg: error.message });
 			}
 		);
+		// console.log("componentDidMount");
+	}
+
+	componentDidUpdate() {
+		console.log("componentDidUpdate");
 	}
 
 	render() {
